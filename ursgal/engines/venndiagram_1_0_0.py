@@ -54,7 +54,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
         input_file_dicts = self.params['input_file_dicts']
 
         data = []
-        print(input_file_dicts)
+        
         for result_file in input_file_dicts:
             data_field = (
                 result_file['last_engine'],
