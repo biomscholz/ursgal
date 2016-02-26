@@ -515,7 +515,7 @@ class UNode(object, metaclass=Meta_UNode):
                 that file.
                 If not specified, this information is taken from the unode class
                 itself, and not a specific file.
-            engine_types (list): the engine type(s) for which the last used engine 
+            engine_types (list): the engine type(s) for which the last used engine
                 should be identified
 
         Examples:
@@ -529,7 +529,7 @@ class UNode(object, metaclass=Meta_UNode):
             "xtandem_sledgehammer"
 
         Returns:
-            str: The name of the last engine that was used. 
+            str: The name of the last engine that was used.
                 Returns None if no search engine was used yet.
         '''
         last_engine = None
@@ -547,7 +547,7 @@ class UNode(object, metaclass=Meta_UNode):
                 meta_engine_type_info = meta.get("engine_type", {})
                 for engine_type in engine_types:
                     if meta_engine_type_info.get( engine_type, False ):
-                        last_engine = history_event["engine"]    
+                        last_engine = history_event["engine"]
                         break
 
                 # if history_event['engine'] == 'merge_csvs_1_0_0':
@@ -766,7 +766,7 @@ class UNode(object, metaclass=Meta_UNode):
                 if unimod_id is None:
                     print (    '''
                         [ WARNING ] '{1}' is not a Unimod modification
-                        [ WARNING ] please change it to a valid PSI-MS unimod_Name 
+                        [ WARNING ] please change it to a valid PSI-MS unimod_Name
                         [ WARNING ] or add the chemical composition hill notation (including 1)
                         [ WARNING ] e.g.: H-1N1O2
                         [ WARNING ] ursgal_style: 'amino_acid,opt/fix,position,name,chemical_composition'
@@ -825,7 +825,7 @@ class UNode(object, metaclass=Meta_UNode):
                 'id'    : unimod_id,
                 'unimod': unimod,
             }
-            if mod_dict['unimod'] == False:            
+            if mod_dict['unimod'] == False:
                 ursgal.GlobalUnimodMapper.writeXML( mod_dict )
 
             self.params[ 'mods' ][ mod_option ].append( mod_dict )
@@ -1145,6 +1145,12 @@ class UNode(object, metaclass=Meta_UNode):
             ),
             tag=tag
         )
+        if self.io['output']['finfo']['is_compressed']:
+            self.params['output_file'] = self.params['output_file'].replace('.gz','')
+            self.print_info(
+                'Will compress output {output_file} on the fly ... renamed temporarily params["output_file"]'
+            .format( **self.params ))
+
         # DEFAULT PARAMS ARE INCLUDED HERE :)
         # self.params = self.DEFAULT_PARAMS.copy()
         self.check_if_all_default_params_are_in_params()
@@ -1223,24 +1229,25 @@ class UNode(object, metaclass=Meta_UNode):
         # but keep novel params that are passed from the unode
         # jsons will get bigger if junk is collected
         # NOTE: all keys starting with _ will be deleted before dump
-        self.params.update( original_params )
-
-        # Compress if required ...
-        post_compressing = self.params.get('compress_after_post_flight', False)
-        compress_engine_output = self.META_INFO.get( 'compress_output', False)
-        if post_compressing and compress_engine_output:
-            output_file = os.path.join(
+        if self.io['output']['finfo']['is_compressed']:
+            gz_output_file = os.path.join(
                 self.io['output']['finfo']['dir'],
                 self.io['output']['finfo']['file']
             )
-            gz_ouput_file = '{0}.gz'.format(output_file)
-            with open( output_file, 'rb') as f_in:
-                with gzip.open( gz_ouput_file, 'wb') as f_out:
+            raw_output = os.path.join(
+                self.params['output_dir_path'],
+                self.params['output_file'],
+                )
+            self.print_info('Compressing output {0} > {1}'.format(
+                os.path.basename(raw_output),
+                os.path.basename(gz_output_file),
+            ))
+            with open( raw_output, 'rb') as f_in:
+                with gzip.open( gz_output_file, 'wb') as f_out:
                     f_out.writelines(f_in)
-            self.io['output']['finfo']['is_compressed'] = True
-            self.io['output']['finfo']['file'] = gz_ouput_file
+            self.created_tmp_files.append( raw_output )
 
-            self.created_tmp_files.append( output_file )
+        self.params.update( original_params )
 
         if self.params['remove_temporary_files']:
             for tmp_file in self.created_tmp_files:
@@ -1260,9 +1267,6 @@ class UNode(object, metaclass=Meta_UNode):
         report['stats'] = self.stats
         report['params'] = self.params
         return report
-
-    def _compress_output(self):
-        pass
 
     def set_params( self, params):
         self.params.update( params )
