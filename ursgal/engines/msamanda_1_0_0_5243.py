@@ -50,7 +50,14 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             self.params['output_dir_path'],
             self.params['output_file']
         )
-        print(self.params['output_file_incl_path'])
+        self.params['unimod_file_incl_path'] = os.path.join(
+                    os.path.dirname(__file__),
+                    '..',
+                    'kb',
+                    'ext',
+                    'unimod.xml'
+                )
+
         # building command_list !
         #
         if sys.platform in ['win32']:
@@ -70,10 +77,15 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         # ----------------------
 
         score_ions = []
+        instruments_file_input = []
         for ion in [ "a", "b", "c", "x", "y", "z", "-H2O", "-NH3", "Imm", "z+1", "z+2", "INT" ]:
             if self.params[ 'score_{0}_ions'.format( ion.lower() ) ] == True:
                 score_ions.append( ion )
+                instruments_file_input.append('''<series>{0}</series>'''.format(ion))
+        instruments_file_input.append('''</setting>''')
+        instruments_file_input.append('''</instruments>''')
         self.params['score_ions'] = ', '.join( score_ions )
+        self.params['instruments_file_input'] = ''.join( instruments_file_input )
 
         self.params['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
                                                     float(self.params['precursor_mass_tolerance_minus']) ) \
@@ -88,6 +100,11 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             self.params['semi_enzyme'] = 'Semi'
         else:
             self.params['semi_enzyme'] = 'Full'
+
+        if self.params['precursor_mass_type'] == 'monoisotopic':
+            self.params['monoisotopic_precursor'] = 'true'
+        else:
+            self.params['monoisotopic_precursor'] = 'false'
 
         if self.params['label'] == '15N':
             for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
@@ -317,13 +334,53 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
     </search_settings>
 
   <basic_settings>
-    <instruments_file>{exe_dir_path}/Instruments.xml</instruments_file>
-    <unimod_file>{exe_dir_path}/unimod.xml</unimod_file>
-    <enzyme_file>{exe_dir_path}/enzymes.xml</enzyme_file>
-    <monoisotopic>true</monoisotopic>
+    <instruments_file>{output_file_incl_path}_instrument.xml</instruments_file>
+    <unimod_file>{unimod_file_incl_path}</unimod_file>
+    <enzyme_file>{output_file_incl_path}_enzymes.xml</enzyme_file>
+    <monoisotopic>{monoisotopic_precursor}</monoisotopic>
     <considered_charges>{considered_charges}</considered_charges>
   </basic_settings>
 </settings>
 '''.format(**self.params),
+
+        '_instrument.xml' : '''<?xml version="1.0"?>
+<!-- possible values are "a", "b", "c", "x", "y", "z", "H2O", "NH3", "IMM", "z+1", "z+2", "INT" (for internal fragments) -->
+<instruments>
+  <setting name="{score_ions}">
+{instruments_file_input}
+'''.format(**self.params),
+
+        '_enzymes.xml' : '''<?xml version="1.0" encoding="utf-8" ?>
+<enzymes>
+  <enzyme>
+    <name>Trypsin</name>
+    <cleavage_sites>KR</cleavage_sites>
+    <inhibitors>P</inhibitors>
+    <position>after</position>
+  </enzyme>
+  <enzyme>
+    <name>Trypsin/P</name>
+    <cleavage_sites>KR</cleavage_sites>
+    <position>after</position>
+  </enzyme>
+  <enzyme>
+    <name>LysC</name>
+    <cleavage_sites>K</cleavage_sites>
+    <position>after</position>
+  </enzyme>
+  <enzyme>
+    <name>GluC</name>
+    <cleavage_sites>DE</cleavage_sites>
+    <position>after</position>
+  </enzyme>
+  <enzyme>
+    <name>No-Enzyme</name>
+    <cleavage_sites>X</cleavage_sites>
+  </enzyme>
+  <enzyme>
+    <name>No-Cleavage</name>
+    <cleavage_sites></cleavage_sites>
+  </enzyme>
+</enzymes>'''.format(),
             }
         return templates
