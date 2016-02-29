@@ -33,7 +33,6 @@ class qvality_2_02( ursgal.UNode ):
         self._generate_qvality_input_files()
 
         self.created_tmp_files += [
-            self.params['tmp_output_file_incl_path'],
             self.params['target']['path'],
             self.params['decoy']['path'],
         ]
@@ -117,6 +116,7 @@ class qvality_2_02( ursgal.UNode ):
                 pep, qvalue              = score_2_pep_and_qvalue_lookup[ formatted_score ]
                 line_dict['PEP']         = pep
                 line_dict['q-value']     = qvalue
+                # print(line_dict)
                 csv_output.writerow( line_dict )
             else:
                 pass
