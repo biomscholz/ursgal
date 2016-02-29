@@ -66,6 +66,7 @@ USED_USEARCH_PARAMS = set( [
     'precursor_mass_tolerance_unit',
     'precursor_mass_tolerance_minus',
     'precursor_mass_tolerance_plus',
+    'precursor_mass_type',  
     'precursor_min_charge',
     'precursor_max_charge',
     'frag_mass_tolerance_unit',
