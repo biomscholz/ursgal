@@ -94,6 +94,10 @@ class percolator_2_08( ursgal.UNode ):
             history = self.stats['history']
         )
         self.params['_score_list'] = self.generating_score_list()
+        # if "omssa" not in last_search_engine:
+        #     print(last_search_engine)
+        #     print(self.params['_score_list'])
+        #     exit()
         minimum_score = None
         if self.params['bigger_scores_better'] is False:
             for p, _score in enumerate(self.params['_score_list']):
@@ -210,7 +214,7 @@ class percolator_2_08( ursgal.UNode ):
                         if per_key not in t.keys():
                             t[ per_key ] = 0
                     if mapped_key != '':
-                        t[ per_key ] = line_dict[ mapped_key ]
+                        t[ per_key ] = line_dict[ mapped_key ].strip()
                 writer.writerow( t )
         o.close()
 
@@ -218,7 +222,7 @@ class percolator_2_08( ursgal.UNode ):
         # marking temporary files for deletion:
         self.created_tmp_files += [
             self.params['decoy_output_file_incl_path'],
-            self.params['percolator_in'],
+            # self.params['percolator_in'],
             '{output_file_incl_path}.psms'.format( **self.params ),
             '{output_file_incl_path}.peptides'.format( **self.params ),
         ]

@@ -182,7 +182,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     X!Tandem
                 '''
                 if 'RTINSECONDS=' in line_dict['Spectrum Title']:
-                    line_2_split = line_dict['Spectrum Title'].split(' ')[0]
+                    line_2_split = line_dict['Spectrum Title'].split(' ')[0].strip()
                 else:
                     line_2_split = line_dict['Spectrum Title']
                 line_dict['Spectrum Title'] = line_2_split
@@ -528,7 +528,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     #             elif cleavage_site == 'N':
                                     # if peptide[0] in allowed_aa:
                                     #     nterm_correct = True
-                    #                 if post_aa not in allowed_aa:
+                    #                 if post_aa in allowed_aa:
                     #                     cterm_correct = True
 
                                 # if params['semi_enzyme'] == True:

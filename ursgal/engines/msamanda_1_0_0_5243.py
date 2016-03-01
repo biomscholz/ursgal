@@ -72,6 +72,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             '{0}'.format( self.params['output_file_incl_path'] + '_settings.xml' ),
             '{output_file_incl_path}'.format(**self.params)
         ]
+        self.created_tmp_files.append(self.params['output_file_incl_path'] + '_settings.xml')
 
         #
         # ----------------------
@@ -154,8 +155,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                                 )
 
         self.params['modifications'] = ''.join( modifications )
-        print(self.params['modifications'])
-
 
         templates = self.format_templates( )
         for file_name, content in templates.items():
@@ -298,7 +297,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                             else:
                                 dict_2_write['Is decoy'] = 'false'
                             csv_write_list.append( dict_2_write )
-            print()
             duplicity_buffer = set()
             for final_dict_2_write in csv_write_list:
                 duplicity_key = (
