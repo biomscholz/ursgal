@@ -19,13 +19,13 @@ META_INFO = {
             }
         },
     },
+    'in_development'            : True,
     'output_extension'          : '.csv',
     'input_types'               : ['.mgf'],
     'create_own_folder'         : True,
     'citation'                  : \
         'Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.',
     'include_in_git'            : False,
-    'in_development'            : False,
 }
 
 DEFAULT_PARAMS = {

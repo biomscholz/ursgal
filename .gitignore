@@ -1,3 +1,12 @@
 .DS_Store
 __pycache__
 __pycache__/*
+tests/data/xtandem_sledgehammer/*
+tests/data/myrimatch_2_1_138/*
+tests/data/msamanda_1_0_0_5243/*
+tests/data/msgfplus_v9979/*
+tests/data/omssa_2_1_9/*
+tests/data/_ursgal_lookup.pkl
+docs/build/
+tests/data/test_Creinhardtii_target_decoy.fasta.*
+
