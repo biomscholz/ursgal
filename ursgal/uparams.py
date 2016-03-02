@@ -108,7 +108,7 @@ ursgal_params={
         'available_in_unode':[
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"multiprocessing.cpu_count() - 1",
@@ -178,7 +178,7 @@ ursgal_params={
         'available_in_unode':[
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
         ],
         'default_value':"",
         'description': ''' path/to/database/file ''',
@@ -232,11 +232,40 @@ ursgal_params={
             'msamanda',
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"trypsin",
-        'description': ''' Enzyme: Rule of protein cleavage ''',
+        'description': '''
+            Enzyme: Rule of protein cleavage
+            Possible cleavages are :
+                'argc'           -> '[R]|{P}'
+                'aspn'           -> '[X]|[D]'
+                'aspn_gluc'
+                'chymotrypsin'   -> '[FMWY]|{P}'
+                'chymotrypsin_p' -> '[FMWY]|[X]'
+                'cnbr'           -> '[M]|{P}'
+                'elastase'       -> '[AGILV]|{P}'
+                # Note not all search engines support all enzymes ! :)
+                'formic_acid'    -> '[D]|{P}'
+                'gluc'
+                'lysc'
+                'lysc_p'
+                'lysn'
+                'no_cleavage'
+                'nonspecific'
+                'pepsina'
+                'semi_chymotrypsin'
+                'semi_gluc'
+                'semi_tryptic'
+                'thermolysin_p'
+                'top_down'
+                'trypsin'
+                'trypsin_chymotrypsin
+                'trypsin_cnbr'
+                'trypsin_p'
+
+        ''',
         'ukey_translation':{
             'msamanda_style_1':'enzyme specificity',
             'msgfplus_style_1':'-e',
@@ -246,8 +275,85 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_translation': {
+            'omssa_style_1' : {
+                'trypsin'              : '0',
+                'argc'                 : '1',
+                'cnbr'                 : '2',
+                'chymotrypsin'         : '3',
+                'formic_acid'          : '4',
+                'lysc'                 : '5',
+                'lysc_p'               : '6',
+                'pepsina'              : '7',
+                'trypsin_cnbr'         : '8',
+                'trypsin_chymotrypsin' : '9',
+                'trypsin_p'            : '10',
+                'no_cleavage'          : '11',
+                'aspn'                 : '12',
+                'gluc'                 : '13',
+                'aspn_gluc'            : '14',
+                'top_down'             : '15',
+                'semi_tryptic'         : '16',
+                'nonspecific'          : '17',
+                'chymotrypsin_p'       : '18',
+                'lysn'                 : '21',
+                'thermolysin_p'        : '22',
+                'semi_chymotrypsin'    : '23',
+                'semi_gluc'            : '24',
+            },
+            'xtandem_style_1' : {
+                'argc' : '[R]|{P}',
+                'aspn' : '[X]|[D]',
+                'chymotrypsin' : '[FMWY]|{P}',
+                'chymotrypsin_p' : '[FMWY]|[X]',
+                'clostripain' : '[R]|[X]',
+                'cnbr' : '[M]|{P}',
+                'elastase' : '[AGILV]|{P}',
+                'formic_acid' : '[D]|{P}',
+                'gluc' : '[DE]|{P}',
+                'gluc_bicarb' : '[E]|{P}',
+                'iodosobenzoate' : '[W]|[X]',
+                'lysc' : '[K]|{P}',
+                'lysc_p' : '[K]|[X]',
+                'lysn' : '[X]|[K]',
+                'lysn_promisc' : '[X]|[AKRS]',
+                'nonspecific' : '[X]|[X]',
+                'pepsina' : '[FL]|[X]',
+                'protein_endopeptidase' : '[P]|[X]',
+                'staph_protease' : '[E]|[X]',
+                'tca' : '[FMWY]|{P},[KR]|{P},[X]|[D]',
+                'trypsin' : '[KR]|{P}',
+                'trypsin_p' : '[RK]|[X]',
+                'trypsin_cnbr' : '[KR]|{P},[M]|{P}',
+                'trypsin_gluc' : '[DEKR]|{P}',
+            }
+        },
+        'uvalue_type':[
+            'argc',
+            'aspn',
+            'aspn_gluc',
+            'chymotrypsin',
+            'chymotrypsin_p',
+            'cnbr',
+            'elastase',
+            'formic_acid',
+            'gluc',
+            'lysc',
+            'lysc_p',
+            'lysn',
+            'no_cleavage',
+            'nonspecific',
+            'pepsina',
+            'semi_chymotrypsin',
+            'semi_gluc',
+            'semi_tryptic',
+            'thermolysin_p',
+            'top_down',
+            'trypsin',
+            'trypsin_chymotrypsin,
+            'trypsin_cnbr',
+            'trypsin_p',
+        ],
     },
     'filter_csv_converter_version':{
         'available_in_unode':[
@@ -284,11 +390,11 @@ ursgal_params={
         'utag':[
         ],
         'uvalue_translation':"",
-        'uvalue_type':"bool oder au nid",
+        'uvalue_type':"bool",
     },
     'frag_mass_tolerance':{
         'available_in_unode':[
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"monoisotopic",
@@ -318,7 +424,7 @@ ursgal_params={
     },
     'frag_mass_type':{
         'available_in_unode':[
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"monoisotopic",
@@ -456,7 +562,7 @@ ursgal_params={
     },
     'label':{
         'available_in_unode':[
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"14N",
@@ -549,7 +655,7 @@ ursgal_params={
         'available_in_unode':[
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
         ],
         'default_value':"40",
         'description': ''' Maximal length of a peptide ''',
@@ -612,7 +718,7 @@ ursgal_params={
         'available_in_unode':[
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
         ],
         'default_value':"6",
         'description': ''' Minimal length of a peptide ''',
@@ -628,7 +734,7 @@ ursgal_params={
     },
     'mininimal_required_matched_peaks':{
         'available_in_unode':[
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"4",
@@ -644,7 +750,7 @@ ursgal_params={
     },
     'mininimal_required_observed_peaks':{
         'available_in_unode':[
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"5",
@@ -663,7 +769,7 @@ ursgal_params={
             'msamanda',
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':[
@@ -794,7 +900,7 @@ Example:
             'msamanda',
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
         ],
         'default_value':"10",
         'description': ''' This parameter sets the maximum number of peptide spectrum matches to report for each spectrum ''',
@@ -874,7 +980,7 @@ Example:
             'msamanda',
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"5",
@@ -894,7 +1000,7 @@ Example:
     'precursor_mass_tolerance_plus':{
         'available_in_unode':[
             'msamanda',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"5",
@@ -912,7 +1018,7 @@ Example:
     'precursor_mass_tolerance_unit':{
         'available_in_unode':[
             'msamanda',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"ppm",
@@ -931,26 +1037,32 @@ Example:
         'available_in_unode':[
             'msamanda',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
         ],
         'default_value':"monoisotopic, (average)",
         'description': ''' Precursor mass type: monoisotopic or average ''',
-        'ukey_translation':{
-            'msamanda_style_1':'monoisotopic',
-            'myrimatch_style_1':'-PrecursorMzToleranceRule <str>',
-            'omssa_style_1':'-tem',
+        'ukey_translation' : {
+            'msamanda_style_1' : 'monoisotopic',
+            'myrimatch_style_1' : '-PrecursorMzToleranceRule <str>',
+            'omssa_style_1' : '-tem',
         },
         'utag':[
+            'precursor',
         ],
-        'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_translation': {
+            'omssa_style_1' : { 'monoisotopic': 0, 'average': 1}
+        },
+        'uvalue_type': [
+            'monoisotopic',
+            'average'
+        ],
     },
     'precursor_max_charge':{
         'available_in_unode':[
             'msamanda',
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
         ],
         'default_value':"5",
         'description': ''' maximal accepted parent ion charge ''',
@@ -969,7 +1081,7 @@ Example:
         'available_in_unode':[
             'msamanda',
             'msgfplus',
-            'omssa',
+            'omssa_2_1_9',
         ],
         'default_value':"1",
         'description': ''' minimal accepted parent ion charge ''',
@@ -1108,7 +1220,7 @@ Example:
     'score_a_ions':{
         'available_in_unode':[
             'msamanda',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"False",
@@ -1126,7 +1238,7 @@ Example:
     'score_b_ions':{
         'available_in_unode':[
             'msamanda',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"True",
@@ -1144,7 +1256,7 @@ Example:
     'score_c_ions':{
         'available_in_unode':[
             'msamanda',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"False",
@@ -1190,7 +1302,7 @@ Example:
     'score_x_ions':{
         'available_in_unode':[
             'msamanda',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"False",
@@ -1208,7 +1320,7 @@ Example:
     'score_y_ions':{
         'available_in_unode':[
             'msamanda',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"True",
@@ -1254,7 +1366,7 @@ Example:
     'score_z_ions':{
         'available_in_unode':[
             'msamanda',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"False",
@@ -1299,22 +1411,22 @@ Example:
             'msamanda',
             'msgfplus',
             'myrimatch',
-            'omssa',
+            'omssa_2_1_9',
             'xtandem',
         ],
         'default_value':"False",
         'description': ''' Allows semi-enzymatic peptide ends ''',
         'ukey_translation':{
-            'msamanda_style_1':'enzyme specificity',
-            'msgfplus_style_1':'-ntt',
-            'myrimatch_style_1':'-MinTerminiCleavages<int>',
-            'omssa_style_1':'-e',
-            'xtandem_style_1':'protein, cleavage semi',
+            'msamanda_style_1'  : 'enzyme specificity',
+            'msgfplus_style_1'  : '-ntt',
+            'myrimatch_style_1' : '-MinTerminiCleavages<int>',
+            # 'omssa_style_1'     : '-e', OMSSA wraper format everything on its own since semitryptic maps on the same doc
+            'xtandem_style_1'   : 'protein, cleavage semi',
         },
         'utag':[
         ],
-        'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_translation': {},
+        'uvalue_type': "bool",
     },
     'show_unodes_in_development':{
         'available_in_unode':[
@@ -1493,7 +1605,7 @@ Example:
         ],
         'uvalue_translation':{
             'percolator_style_1':{
-                'omssa_style_1':'OMSSA:pvalue',
+                'omssa_style_1' : 'OMSSA:pvalue',
             },
         },
         'uvalue_type':"",
