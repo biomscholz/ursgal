@@ -645,10 +645,12 @@ ursgal_params = {
     },
     'java_-Xmx':{
         'available_in_unode' : [
+            'msgfplus_v9979'
         ],
         'default_value' : "13312m",
         'description' :  ''' set maximum Java heap size ''',
         'ukey_translation' : {
+            'msgfplus_style_1' : 'java_-Xmx'
         },
         'utag' : [
         ],
@@ -680,12 +682,14 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'msgfplus_v9979',
         ],
         'default_value' : "14N",
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
         'ukey_translation' : {
             'omssa_style_1' : '-tem / -tom',
             'xtandem_style_1' : 'protein, modified residue mass file',
+            'msgfplus_style_1' : 'label',
         },
         'utag' : [
         ],
