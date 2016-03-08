@@ -3,6 +3,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
+            'mzidentml_lib_1_6_11',
         ],
         'default_value' : "13312m",
         'description' :  ''' Set maximum Java heap size (used RAM) ''',
@@ -228,6 +229,8 @@ ursgal_params = {
     },
     'database' : {
         'available_in_unode' : [
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -236,6 +239,7 @@ ursgal_params = {
         'description' :  ''' Path to database file ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'msamanda_style_1' : 'database',
             'msgfplus_style_1' : '-d',
             'myrimatch_style_1' : '-ProteinDatabase <string>',
             'omssa_style_1' : '-d',
@@ -264,6 +268,7 @@ ursgal_params = {
     'decoy_tag' : {
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
+            'mzidentml_lib_1_6_11',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
@@ -327,7 +332,8 @@ ursgal_params = {
     },
     'enzyme' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_5242',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -440,6 +446,31 @@ ursgal_params = {
                 'trypsin_gluc' : '[DEKR]|{P}',
                 'trypsin_p' : '[RK]|[X]',
             },
+            'msamanda_style_1' : {
+                'argc' :            ('R', 'after', 'P'),
+                'aspn' :            ('D', 'before', ''),
+                'chymotrypsin' :    ('FMWY', 'after', 'P'),
+                'chymotrypsin_p' :  ('FMWY', 'after', ''),
+                'clostripain' :     ('R', 'after', ''),
+                'cnbr' :            ('M', 'after', 'P'),
+                'elastase' :        ('AGILV', 'after', 'P'),
+                'formic_acid' :     ('D', 'after', 'P'),
+                'gluc' :            ('DE', 'after', 'P'),
+                'gluc_bicarb' :     ('E', 'after', 'P'),
+                'iodosobenzoate' :  ('W', 'after', ''),
+                'lysc' :            ('K', 'after', 'P'),
+                'lysc_p' :          ('K', 'after', ''),
+                'lysn' :            ('K', 'before', ''),
+                'lysn_promisc' :    ('AKRS', 'before', ''),
+                'pepsina' :         ('FL', 'after', ''),
+                'protein_endopeptidase' : ('P', 'after', ''),
+                'staph_protease' :  ('E', 'after', ''),
+                'trypsin' :         ('KR', 'after', 'P'),
+                'trypsin_p' :       ('KR', 'after', ''),
+                'trypsin_cnbr' :    ('KRM', 'after', 'P'),
+                'trypsin_gluc' :    ('DEKR', 'after', 'P'),
+                'nonspecific' :     ('', '', ''),
+            },
         },
         'uvalue_type' : [
             'argc',
@@ -550,9 +581,11 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243'
         ],
         'default_value' : "ppm",
-        'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), Da (Dalton) or mmu (Milli mass unit) ''',
+        'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error units',
@@ -871,6 +904,8 @@ ursgal_params = {
     'label' : {
         'available_in_unode' : [
             'msgfplus_v9979',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -885,12 +920,14 @@ ursgal_params = {
             'msgfplus_style_1' : 'label',
             'omssa_style_1' : '-tem / -tom',
             'xtandem_style_1' : 'protein, modified residue mass file',
+            'msamanda_style_1' :'label'
         },
         'utag' : [
+            'label', 'modifications'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : ['14N', '15N'],
     },
     'log_enabled' : {
         'available_in_unode' : [
@@ -1044,7 +1081,8 @@ ursgal_params = {
     },
     'maximum_missed_cleavages' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'myrimatch',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -1063,6 +1101,7 @@ ursgal_params = {
             'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
         },
         'utag' : [
+            'protein'
         ],
         'uvalue_translation' : {
         },
@@ -1084,12 +1123,15 @@ ursgal_params = {
     },
     'mgf_input_file' : {
         'available_in_unode' : [
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
         ],
         'default_value' : None,
         'description' :  ''' Path to input .mgf file ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'msamanda_style_1' : 'mgf_input_file',
             'msgfplus_style_1' : '-s',
         },
         'utag' : [
@@ -1166,7 +1208,8 @@ ursgal_params = {
     },
     'modifications' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_5242',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -1216,10 +1259,11 @@ Example:
             'xtandem_style_1' : 'protein, C-terminal residue modification mass',
         },
         'utag' : [
+            'modifications'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "list",
     },
     'msgfplus_protocol_id' : {
         'available_in_unode' : [
@@ -1245,6 +1289,7 @@ Example:
     'mzidentml_compress' : {
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
+            'mzidentml_lib_1_6_11',
         ],
         'default_value' : False,
         'description' :  ''' Compress mzidentml_lib output files ''',
@@ -1267,7 +1312,7 @@ Example:
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : "mzidentml_lib_1_6_10",
+        'default_value' : "mzidentml_lib_1_6_11",
         'description' :  ''' mzidentml converter version: version name ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1283,6 +1328,7 @@ Example:
     'mzidentml_export_type' : {
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
+            'mzidentml_lib_1_6_11',
         ],
         'default_value' : "exportPSMs",
         'description' :  ''' Defines which paramters shoul be exporte by mzidentml_lib ''',
@@ -1306,6 +1352,7 @@ Example:
     'mzidentml_function' : {
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
+            'mzidentml_lib_1_6_11',
         ],
         'default_value' : "Mzid2Csv",
         'description' :  ''' Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far ''',
@@ -1333,6 +1380,7 @@ Example:
     'mzidentml_output_fragmentation' : {
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
+            'mzidentml_lib_1_6_11',
         ],
         'default_value' : False,
         'description' :  ''' Include fragmentation in mzidentml_lib output ''',
@@ -1354,6 +1402,7 @@ Example:
     'mzidentml_verbose_output' : {
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
+            'mzidentml_lib_1_6_11',
         ],
         'default_value' : False,
         'description' :  ''' Verbose mzidentml_lib output ''',
@@ -1570,6 +1619,10 @@ Example:
         'available_in_unode' : [
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
+            'mzidentml_lib_1_6_11',
+            'venndiagram_1_0_0',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
@@ -1577,6 +1630,8 @@ Example:
         'ukey_translation' : {
             'msgfplus_style_1' : '-o',
             'mzidentml_style_1' : 'output_file_incl_path',
+            'msamanda_style_1' : 'output_file_incl_path',
+            'venndiagram_style_1' : 'output_file_incl_path',
         },
         'utag' : [
             'output',
@@ -1647,7 +1702,8 @@ Example:
     },
     'precursor_mass_tolerance_minus' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -1676,7 +1732,8 @@ Example:
     },
     'precursor_mass_tolerance_plus' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -1703,7 +1760,8 @@ Example:
     },
     'precursor_mass_tolerance_unit' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -1725,6 +1783,12 @@ Example:
             'precursor',
         ],
         'uvalue_translation' : {
+            'msgfplus_style_1' : {
+                'da' : 'Da'
+            },
+            'msamanda_style_1' : {
+                'da' : 'Da'
+            },
         },
         'uvalue_type' : [
             'da',
@@ -1734,11 +1798,12 @@ Example:
     },
     'precursor_mass_type' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'myrimatch',
             'omssa_2_1_9',
         ],
-        'default_value' : "monoisotopic, (average)",
+        'default_value' : "monoisotopic",
         'description' :  ''' Precursor mass type: monoisotopic or average ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1754,6 +1819,10 @@ Example:
                 'average' : '1',
                 'monoisotopic' : '0',
             },
+            'msamanda_style_1' : {
+                'average' : 'false',
+                'monoisotopic' : 'true',
+            },
         },
         'uvalue_type' : [
             'average',
@@ -1762,7 +1831,8 @@ Example:
     },
     'precursor_max_charge' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -1785,7 +1855,8 @@ Example:
     },
     'precursor_min_charge' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'omssa_2_1_9',
         ],
@@ -1943,39 +2014,44 @@ Example:
     },
     'score_-h2o_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true, ions loss of H2O are respected in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_-nh3_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true, ions loss of NH3 are respected in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_a_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_5242',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1983,7 +2059,7 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true, a ions are used in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1992,14 +2068,16 @@ Example:
             'xtandem_style_1' : 'scoring, a ions',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_b_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2007,7 +2085,7 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "True",
+        'default_value' : True,
         'description' :  ''' Spectrum: if true, b ions are used in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -2016,14 +2094,16 @@ Example:
             'xtandem_style_1' : 'scoring, b ions',
         },
         'utag' : [
+            'scoring',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_c_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_5242',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2031,7 +2111,7 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true, c ions are used in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -2040,46 +2120,52 @@ Example:
             'xtandem_style_1' : 'scoring, c ions',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_imm_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true, immonium ions are respected in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_int_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true, internal fragment ions are respect in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_x_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2087,7 +2173,7 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true, x ions are used in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -2096,14 +2182,16 @@ Example:
             'xtandem_style_1' : 'scoring, x ions',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_y_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2111,7 +2199,7 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "True",
+        'default_value' : True,
         'description' :  ''' Spectrum: if true, y ions are used in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -2120,46 +2208,52 @@ Example:
             'xtandem_style_1' : 'scoring, y ions',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_z+1_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true, z ion plus 1 Da mass are used in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_z+2_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true z ion plus 2 Da mass are used in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'score_z_ions' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2167,7 +2261,7 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Spectrum: if true, z ions are used in algorithm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -2176,10 +2270,11 @@ Example:
             'xtandem_style_1' : 'scoring, z ions',
         },
         'utag' : [
+            'scoring'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'search_engines_create_folders' : {
         'available_in_unode' : [
@@ -2220,7 +2315,8 @@ Example:
     },
     'semi_enzyme' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_5242',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -2247,6 +2343,10 @@ Example:
             'msgfplus_style_1' : {
                 False : '2',
                 True : '1',
+            },
+            'msamanda_style_1' : {
+                False : 'Full',
+                True : 'Semi',
             },
         },
         'uvalue_type' : "bool",
@@ -2450,6 +2550,24 @@ Example:
         },
         'uvalue_type' : "str",
     },
+    # 'unimod_file_incl_path' : {
+    #     'available_in_unode' : [
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #     ],
+    #     'default_value' : "",
+    #     'description' :  ''' Path to unimod.xml file ''',
+    #     'trigger_rerun' : True,
+    #     'ukey_translation' : {
+    #         'msamanda_style_1' : 'unimod_file_incl_path',
+    #     },
+    #     'utag' : [
+    #         'input',
+    #     ],
+    #     'uvalue_translation' : {
+    #     },
+    #     'uvalue_type' : "str",
+    # },
     'use_refine' : {
         'available_in_unode' : [
         ],
@@ -2509,6 +2627,146 @@ Example:
             },
         },
         'uvalue_type' : "",
+    },
+    'visualization_column_names' : {
+        'available_in_unode' : [
+            'venndiagram_1_0_0',
+        ],
+        'default_value' : [
+            'Modifications',
+            'Sequence',
+        ],
+        'description' :  ''' The specified csv column names are used for the visualization. E.g. for a Venn diagram the entries of these columns are used (merged) to determine overlapping results. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'visualize_column_names',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
+    'visualization_font' : {
+        'available_in_unode' : [
+            'venndiagram_1_0_0',
+        ],
+        'default_value' : ('Helvetica', 31, 25, 20, 20),
+        'description' :  ''' Font used for visualiyation plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'visualization_font',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "tuple",
+    },
+    'visualization_header' : {
+        'available_in_unode' : [
+            'venndiagram_1_0_0',
+        ],
+        'default_value' : "ursgal Venn Diagram",
+        'description' :  ''' Header of visualization output (e.g. Venn diagram) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'header',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'visualization_label_list' : {
+        'available_in_unode' : [
+            'venndiagram_1_0_0',
+        ],
+        'default_value' : [
+        ],
+        'description' :  ''' Specifies labels for the datasets that should be visualized. Needs to be given in the same order as the datasets. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'visualize_label_list',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
+    'visualization_opacity' : {
+        'available_in_unode' : [
+            'venndiagram_1_0_0',
+        ],
+        'default_value' : 0.35,
+        'description' :  ''' Opacity used in visualiyation plots (e.g. Venn diagram) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'opacity',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'visualization_scaling_factors' : {
+        'available_in_unode' : [
+            'venndiagram_1_0_0',
+        ],
+        'default_value' : (600, 400),
+        'description' :  ''' Scaling factor for visualiyation plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'visualization_scaling_factors',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "tuple",
+    },
+    'visualization_size' : {
+        'available_in_unode' : [
+            'venndiagram_1_0_0',
+        ],
+        'default_value' : (1200, 800),
+        'description' :  ''' Size of visualiyation plots (e.g. Venn diagram), given as tuple (width, height) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'stroke-width',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "tuple",
+    },
+    'visualization_stroke_width' : {
+        'available_in_unode' : [
+            'venndiagram_1_0_0',
+        ],
+        'default_value' : 2.0,
+        'description' :  ''' Stroke width used in visualiyation plots (e.g. Venn diagram) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'stroke-width',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
     },
     'write_unfiltered_results' : {
         'available_in_unode' : [
