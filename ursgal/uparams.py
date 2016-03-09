@@ -2803,8 +2803,8 @@ Example:
         ],
         'uvalue_translation' : {
             'qvality_style_1' : {
-            False: None,
-            True: '',
+                False : 'None',
+                True : '',
             },
         },
         'uvalue_type' : "bool",
