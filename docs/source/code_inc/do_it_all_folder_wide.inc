@@ -39,10 +39,10 @@
 	    # We specify all search engines and validation engines that we want to use in a list
 	    # (version numbers might differ on windows or mac):
 	    search_engines  = [
-	        'omssa',
-	        'xtandem_piledriver',
+	        # 'omssa',
+	        # 'xtandem_piledriver',
 	        'msgf',
-	        # 'msamanda_1_0_0_5243',
+	        'msamanda_1_0_0_5243',
 	        # 'myrimatch_2_1_138',
 	    ]
 	
