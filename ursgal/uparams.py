@@ -52,14 +52,14 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "100000",
+        'default_value' : 100000,
         'description' :  ''' sets the number of sequences loaded in as a batch from the database file ''',
-        'trigger_rerun' : True,
+        'trigger_rerun' : False,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, sequence batch size',
         },
         'utag' : [
-            'spectrum',
+            'hardware_resources',
         ],
         'uvalue_translation' : {
         },
@@ -86,11 +86,21 @@ ursgal_params = {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
                 'msgfplus_v9979' : False,
+                'xtandem_cyclone_2010' : True,
+                'xtandem_jackhammer' : True,
+                'xtandem_piledriver' : True,
+                'xtandem_sledgehammer' : True,
+                'xtandem_vengeance' : True,
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
                 'msgfplus_v9979' : False,
+                'xtandem_cyclone_2010' : True,
+                'xtandem_jackhammer' : True,
+                'xtandem_piledriver' : True,
+                'xtandem_sledgehammer' : True,
+                'xtandem_vengeance' : True,
             },
         },
         'uvalue_type' : "",
@@ -103,17 +113,18 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "17.00305",
+        'default_value' : 17.00305,
         'description' :  ''' The mass added to the peptide C-terminus by protein cleavage ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, cleavage C-terminal mass change',
         },
         'utag' : [
+            'protein',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "float",
     },
     'cleavage_nterm_mass_change' : {
         'available_in_unode' : [
@@ -123,17 +134,18 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "1.00794",
+        'default_value' : 1.00794,
         'description' :  ''' The mass added to the peptide N-terminus bz protein cleavage ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, cleavage N-terminal mass change',
         },
         'utag' : [
+            'protein',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "float",
     },
     'compensate_small_fasta' : {
         'available_in_unode' : [
@@ -143,17 +155,22 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "False",
-        'description' :  ''' compensate for very small database files. ''',
+        'default_value' : False,
+        'description' :  ''' Compensate for very small database files. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'scoring, cyclic permutation',
         },
         'utag' : [
+            'database',
         ],
         'uvalue_translation' : {
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'compress_after_post_flight' : {
         'available_in_unode' : [
@@ -203,7 +220,7 @@ ursgal_params = {
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : "True",
+        'default_value' : True,
         'description' :  ''' Compress raw search result to .gz: True or False ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -267,18 +284,46 @@ ursgal_params = {
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
         ],
         'default_value' : None,
-        'description' :  ''' Path to database file ''',
+        'description' :  ''' Path to database file containing protein sequences in fasta format ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'database',
             'msgfplus_style_1' : '-d',
             'myrimatch_style_1' : '-ProteinDatabase <string>',
             'omssa_style_1' : '-d',
+            'xtandem_style_1' : 'file URL',
         },
         'utag' : [
+            'database',
             'input',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'database_taxonomy' : {
+        'available_in_unode' : [
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
+        ],
+        'default_value' : "all",
+        'description' :  ''' If a taxonomy ID is specified, only the corresponding protein sequences from the fasta database are included in the search. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'xtandem_style_1' : 'taxon label',
+        },
+        'utag' : [
+            'database',
         ],
         'uvalue_translation' : {
         },
@@ -312,6 +357,7 @@ ursgal_params = {
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
             'qvality_2_02',
+            'xtandem2csv_1_0_0',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
@@ -321,6 +367,7 @@ ursgal_params = {
             'msamanda_style_1' : 'decoy_tag',
             'mzidentml_style_1' : '-decoyRegex',
             'qvality_style_1' : 'decoy_tag',
+            'xtandem2csv_style_1' : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -377,6 +424,10 @@ ursgal_params = {
             'msgfplus_style_1' : {
                 False : '0',
                 True : '1',
+            },
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
             },
         },
         'uvalue_type' : "bool",
@@ -513,9 +564,6 @@ ursgal_params = {
                 'no_cleavage' : '11',
                 'nonspecific' : '17',
                 'pepsina' : '7',
-                'semi_chymotrypsin' : '23',
-                'semi_gluc' : '24',
-                'semi_tryptic' : '16',
                 'thermolysin_p' : '22',
                 'top_down' : '15',
                 'trypsin' : '0',
@@ -556,24 +604,29 @@ ursgal_params = {
             'aspn_gluc',
             'chymotrypsin',
             'chymotrypsin_p',
+            'clostripain',
             'cnbr',
             'elastase',
             'formic_acid',
             'gluc',
+            'gluc_bicarb',
+            'iodosobenzoate',
             'lysc',
             'lysc_p',
             'lysn',
+            'lysn_promisc',
             'no_cleavage',
             'nonspecific',
             'pepsina',
-            'semi_chymotrypsin',
-            'semi_gluc',
-            'semi_tryptic',
+            'protein_endopeptidase',
+            'staph_protease',
+            'tca',
             'thermolysin_p',
             'top_down',
             'trypsin',
             'trypsin_chymotrypsin',
             'trypsin_cnbr',
+            'trypsin_gluc',
             'trypsin_p',
         ],
     },
@@ -596,23 +649,21 @@ ursgal_params = {
     },
     'forbidden_cterm_mods' : {
         'available_in_unode' : [
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "[]",
-        'description' :  ''' List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide ''',
+        'default_value' : [
+        ],
+        'description' :  ''' List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide, e.g. ['GG'] ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'residue, potential modification mass',
         },
         'utag' : [
+            'Modifications',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "list",
     },
     'force' : {
         'available_in_unode' : [
@@ -680,6 +731,9 @@ ursgal_params = {
             'msamanda_style_1' : {
                 'da' : 'Da',
             },
+            'xtandem_style_1' : {
+                'da' : 'Daltons',
+            },
         },
         'uvalue_type' : [
             'da',
@@ -704,10 +758,14 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, fragment mass type',
         },
         'utag' : [
+            'fragment',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : [
+            'average',
+            'monoisotopic',
+        ],
     },
     'frag_method' : {
         'available_in_unode' : [
@@ -745,17 +803,19 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "150",
-        'description' :  ''' minimal considered fragment ion m/z ''',
+        'default_value' : 150,
+        'description' :  ''' Minimal considered fragment ion m/z ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, minimum fragment mz',
         },
         'utag' : [
+            'MS2',
+            'fragment',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'ftp_blocksize' : {
         'available_in_unode' : [
@@ -1046,8 +1106,8 @@ ursgal_params = {
             'xtandem_style_1' : 'protein, modified residue mass file',
         },
         'utag' : [
+            'Modifications',
             'label',
-            'modifications',
         ],
         'uvalue_translation' : {
         },
@@ -1108,23 +1168,20 @@ ursgal_params = {
     },
     'max_mod_alternatives' : {
         'available_in_unode' : [
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "6",
+        'default_value' : 6,
         'description' :  ''' Maximal number of variable modification alternatives, given as C in 2^C ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, ptm complexity',
         },
         'utag' : [
+            'Modifications',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'max_num_mods' : {
         'available_in_unode' : [
@@ -1137,7 +1194,7 @@ ursgal_params = {
             'msgfplus_style_1' : 'NumMods',
         },
         'utag' : [
-            'modifications',
+            'Modifications',
         ],
         'uvalue_translation' : {
         },
@@ -1162,23 +1219,43 @@ ursgal_params = {
     },
     'max_num_per_mod' : {
         'available_in_unode' : [
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "{}",
+        'default_value' : {
+        },
         'description' :  ''' Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number} ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'residue, potential modification mass',
         },
         'utag' : [
+            'Modifications',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "dict",
+    },
+    'max_output_e_value' : {
+        'available_in_unode' : [
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
+        ],
+        'default_value' : 1.0,
+        'description' :  ''' Highest e-value for recorded peptides ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'xtandem_style_1' : 'output, maximum valid expectation value',
+        },
+        'utag' : [
+            'output',
+            'scoring',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
     },
     'max_pep_length' : {
         'available_in_unode' : [
@@ -1203,14 +1280,13 @@ ursgal_params = {
     },
     'maximal_accounted_observed_peaks' : {
         'available_in_unode' : [
-            'myrimatch',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "50",
+        'default_value' : 50,
         'description' :  ''' Maximum number of peaks from a spectrum used. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1218,10 +1294,12 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, total peaks',
         },
         'utag' : [
+            'MS2',
+            'fragment',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'maximum_missed_cleavages' : {
         'available_in_unode' : [
@@ -1270,6 +1348,11 @@ ursgal_params = {
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
         ],
         'default_value' : None,
         'description' :  ''' Path to input .mgf file ''',
@@ -1277,6 +1360,7 @@ ursgal_params = {
         'ukey_translation' : {
             'msamanda_style_1' : 'mgf_input_file',
             'msgfplus_style_1' : '-s',
+            'xtandem_style_1' : 'spectrum, path',
         },
         'utag' : [
             'input',
@@ -1315,7 +1399,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "4",
+        'default_value' : 4,
         'description' :  ''' Mimimum number of matched ions required for a peptide to be scored ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1323,10 +1407,11 @@ ursgal_params = {
             'xtandem_style_1' : 'scoring, minimum ion count',
         },
         'utag' : [
+            'fragment',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'mininimal_required_observed_peaks' : {
         'available_in_unode' : [
@@ -1337,7 +1422,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "5",
+        'default_value' : 5,
         'description' :  ''' Mimimum number of peaks in the spectrum to be considered. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1345,10 +1430,12 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, minimum peaks',
         },
         'utag' : [
+            'MS2',
+            'fragment',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'modifications' : {
         'available_in_unode' : [
@@ -1396,14 +1483,14 @@ Example:
  [ 'S,opt,any,New_mod,C2H5N1O3' ] ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'msamanda_style_1' : 'modification protein=true cterm=true',
+            'msamanda_style_1' : 'modifications',
             'msgfplus_style_1' : '-mod',
             'myrimatch_style_1' : '-StaticMods<str>',
             'omssa_style_1' : '-mv',
-            'xtandem_style_1' : 'protein, C-terminal residue modification mass',
+            'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
         },
         'utag' : [
-            'modifications',
+            'Modifications',
         ],
         'uvalue_translation' : {
         },
@@ -1590,17 +1677,23 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Neutral losses enabled for spectrum algorithm: set  True or False ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, use neutral loss window',
         },
         'utag' : [
+            'MS2',
+            'fragment',
         ],
         'uvalue_translation' : {
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'neutral_loss_mass' : {
         'available_in_unode' : [
@@ -1610,17 +1703,19 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "0",
+        'default_value' : 0,
         'description' :  ''' Sets the centre of the window for ignoring neutral molecule losses. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, neutral loss mass',
         },
         'utag' : [
+            'MS2',
+            'fragment',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'neutral_loss_window' : {
         'available_in_unode' : [
@@ -1630,17 +1725,19 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "0",
+        'default_value' : 0,
         'description' :  ''' Neutral loss window: sets the width of the window for ignoring neutral molecule losses. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, neutral loss window',
         },
         'utag' : [
+            'MS2',
+            'fragment',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'noise_suppression_enabled' : {
         'available_in_unode' : [
@@ -1772,6 +1869,11 @@ Example:
             'percolator_2_08',
             'qvality_2_02',
             'venndiagram_1_0_0',
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
@@ -1785,6 +1887,7 @@ Example:
             'percolator_style_1' : 'output_file_incl_path',
             'qvality_style_1' : '-o',
             'venndiagram_style_1' : 'output_file',
+            'xtandem_style_1' : 'output, path',
         },
         'utag' : [
             'output',
@@ -1806,6 +1909,31 @@ Example:
         'uvalue_translation' : {
         },
         'uvalue_type' : "",
+    },
+    'output_mzid' : {
+        'available_in_unode' : [
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
+        ],
+        'default_value' : False,
+        'description' :  ''' Repot results in mzid format ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'xtandem_style_1' : 'refine',
+        },
+        'utag' : [
+            'Output',
+        ],
+        'uvalue_translation' : {
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
+        },
+        'uvalue_type' : "bool",
     },
     'output_suffix' : {
         'available_in_unode' : [
@@ -1909,7 +2037,7 @@ Example:
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'precursor_mass_tolerance_unit' : {
         'available_in_unode' : [
@@ -1941,6 +2069,9 @@ Example:
             },
             'msgfplus_style_1' : {
                 'da' : 'Da',
+            },
+            'xtandem_style_1' : {
+                'da' : 'Daltons',
             },
         },
         'uvalue_type' : [
@@ -2037,18 +2168,19 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "400",
-        'description' :  ''' minimal parent ion mass ''',
+        'default_value' : 400,
+        'description' :  ''' Minimal parent ion mass ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : '-MinPeptideMass <real>',
-            'xtandem_style_1' : 'spectrum, minimum parent m+h -sets the minimum parent M+H required for a spectrum to be considered.',
+            'xtandem_style_1' : 'spectrum, minimum parent m+h',
         },
         'utag' : [
+            'Precursor',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'precursor_ppm_offset' : {
         'available_in_unode' : [
@@ -2302,6 +2434,10 @@ Example:
                 False : '',
                 True : '0',
             },
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2332,6 +2468,10 @@ Example:
                 False : '',
                 True : '1',
             },
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2361,6 +2501,10 @@ Example:
             'omssa_style_1' : {
                 False : '',
                 True : '2',
+            },
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
             },
         },
         'uvalue_type' : "bool",
@@ -2428,6 +2572,10 @@ Example:
                 False : '',
                 True : '3',
             },
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2457,6 +2605,10 @@ Example:
             'omssa_style_1' : {
                 False : '',
                 True : '4',
+            },
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
             },
         },
         'uvalue_type' : "bool",
@@ -2523,6 +2675,10 @@ Example:
             'omssa_style_1' : {
                 False : '',
                 True : '5',
+            },
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
             },
         },
         'uvalue_type' : "bool",
@@ -2594,17 +2750,22 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "False",
-        'description' :  ''' search for potential single amino acid polymorphisms ''',
+        'default_value' : False,
+        'description' :  ''' Search for potential single amino acid polymorphisms. 'True' might cause problems in the downstream processing of th result files (unify_csv, ...) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, saps',
         },
         'utag' : [
+            'protein',
         ],
         'uvalue_translation' : {
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'semi_enzyme' : {
         'available_in_unode' : [
@@ -2641,6 +2802,10 @@ Example:
                 False : '2',
                 True : '1',
             },
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2668,163 +2833,19 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "100",
-        'description' :  ''' Spectrum, internal normalization: The highest peak (intensity) within a spectrum is set to given value and all other peaks are normalized to this peak. If the normalized value is less than 1 he peak is rejected. ''',
+        'default_value' : 100,
+        'description' :  ''' Internal normalization for MS/MS spectrum: The highest peak (intensity) within a spectrum is set to given value and all other peaks are normalized to this peak. If the normalized value is less than 1 the peak is rejected. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, dynamic range',
         },
         'utag' : [
+            'MS2',
+            'fragment',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
-    },
-    'stp_bias' : {
-        'available_in_unode' : [
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "False",
-        'description' :  ''' Interpretation of peptide phosphorylation models. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'xtandem_style_1' : 'protein, stP bias',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    'ukey1' : {
-        'available_in_unode' : [
-            'msamanda',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "",
-        'description' :  '''  ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'modification protein=true nterm=true',
-            'xtandem_style_1' : 'protein, N-terminal residue modification mass',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    'ukey2' : {
-        'available_in_unode' : [
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "",
-        'description' :  '''  ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'xtandem_style_1' : 'protein, quick acetyl',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    'ukey3' : {
-        'available_in_unode' : [
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "",
-        'description' :  '''  ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'xtandem_style_1' : 'protein, quick pyrolidone',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    'ukey4' : {
-        'available_in_unode' : [
-            'msamanda',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "",
-        'description' :  '''  ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'modification fix=true',
-            'xtandem_style_1' : 'residue, modification mass',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    'ukey5' : {
-        'available_in_unode' : [
-            'msamanda',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "",
-        'description' :  '''  ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'modification fix=false',
-            'xtandem_style_1' : 'residue, potential modification mass',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    'ukey6' : {
-        'available_in_unode' : [
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "",
-        'description' :  '''  ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'xtandem_style_1' : 'residue, potential modification motif',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'unify_csv_converter_version' : {
         'available_in_unode' : [
@@ -2843,19 +2864,30 @@ Example:
         },
         'uvalue_type' : "str",
     },
-    'use_refine' : {
+    'use_refinement' : {
         'available_in_unode' : [
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
         ],
-        'default_value' : "False",
-        'description' :  '''  ''',
+        'default_value' : False,
+        'description' :  ''' X! TANDEM can use 'refinement' to improve the speed and accuracy of peptide modelling. This is not included in Ursgal, yet. See further: http://www.thegpm.org/TANDEM/api/refine.html ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'xtandem_style_1' : 'refine',
         },
         'utag' : [
+            'refinement',
         ],
         'uvalue_translation' : {
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'validated_ident_csv_suffix' : {
         'available_in_unode' : [
@@ -2914,6 +2946,11 @@ Example:
                 'msamanda_1_0_0_5242' : 0,
                 'msamanda_1_0_0_5243' : 0,
                 'msgfplus_v9979' : 1e-100,
+                'xtandem_cyclone_2010' : 0,
+                'xtandem_jackhammer' : 0,
+                'xtandem_piledriver' : 0,
+                'xtandem_sledgehammer' : 0,
+                'xtandem_vengeance' : 0,
             },
         },
         'uvalue_type' : "",
@@ -2924,6 +2961,11 @@ Example:
             'qvality_2_02',
             'ucontroller',
             'unify_csv_1_0_0',
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator ''',
@@ -2933,6 +2975,7 @@ Example:
             'qvality_style_1' : 'validation_score_field',
             'ucontroller_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
+            'xtandem_style_1' : 'validation_score_field',
         },
         'utag' : [
             'validation',
@@ -2943,24 +2986,44 @@ Example:
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
             },
         },
         'uvalue_type' : "",
@@ -3121,5 +3184,30 @@ Example:
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
+    },
+    'xtandem_stp_bias' : {
+        'available_in_unode' : [
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
+        ],
+        'default_value' : False,
+        'description' :  ''' Interpretation of peptide phosphorylation models. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'xtandem_style_1' : 'protein, stP bias',
+        },
+        'utag' : [
+            'Modifications',
+        ],
+        'uvalue_translation' : {
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
+        },
+        'uvalue_type' : "",
     },
 }
