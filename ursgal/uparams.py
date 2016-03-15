@@ -499,6 +499,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
         'default_value' : "trypsin",
         'description' :  ''' Enzyme: Rule of protein cleavage
@@ -537,6 +538,7 @@ ursgal_params = {
             'omssa_style_1' : '-e',
             'xtandem_style_1' : 'protein, cleavage site',
             'novor_style_1' : 'enzyme',
+            'pepnovo_style_1' : '-digest',
         },
         'utag' : [
             'database',
@@ -569,6 +571,10 @@ ursgal_params = {
             },
             'novor_style_1' : {
                 'trypsin'    : 'Trypsin',
+            },
+            'pepnovo_style_1' : {
+                'nonspecific' : 'NON_SPECIFIC',
+                'trypsin'     : 'TRYPSIN',
             },
             'msamanda_style_1' : {
                 'argc' : 'R;after;P',
@@ -764,6 +770,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
         'default_value' : 5,
         'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
@@ -774,6 +781,7 @@ ursgal_params = {
             'omssa_style_1' : '-to',
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error',
             'novor_style_1' : 'fragmentIonErrorTol',
+            'pepnovo_style_1' : '-fragment_tolerance',
         },
         'utag' : [
             'fragment',
@@ -794,6 +802,7 @@ ursgal_params = {
             'myrimatch_2_1_140',
             'myrimatch_2_1_138',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
         'default_value' : "ppm",
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
@@ -803,6 +812,7 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error units',
             'myrimatch_style_1' : 'FragmentMzTolerance',
             'novor_style_1' : 'fragmentIonErrorTol',
+            'pepnovo_style_1' : 'frag_mass_tolerance_unit',
         },
         'utag' : [
             'fragment',
@@ -1031,13 +1041,15 @@ ursgal_params = {
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
-        'default_value' : "",
+        'default_value' : None,
         'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'header_translations',
-            'novor_style_1' : 'header_translations'
+            'novor_style_1' : 'header_translations',
+            'pepnovo_style_1' : 'header_translations',
         },
         'utag' : [
             'conversion',
@@ -1069,6 +1081,16 @@ ursgal_params = {
                 ' err(data-denovo)'      : 'Error (exp-calc)',
                 ' ppm(1e6*err/(mz*z))'   : 'Error (ppm)',
                 ' aaScore'               : 'Novor:aaScore',
+            },
+            'pepnovo_style_1': {
+                '#Index'                 : 'Pepnovo:id',
+                'RnkScr'                 : 'Pepnovo:RnkScr',
+                'CumProb'                : 'Pepnovo:CumProb',
+                'PnvScr'                 : 'Pepnovo:PnvScr',
+                'N-Gap'                  : 'Pepnovo:N-Gap',
+                'C-Gap'                  : 'Pepnovo:C-Gap',
+                '[M+H]'                  : 'Calc mass(Da)',
+                'output_aa_probs'        : 'Pepnovo:aaScore'
             },
         },
         'uvalue_type' : "",
@@ -1497,6 +1519,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
         'default_value' : None,
         'description' :  ''' Path to input .mgf file ''',
@@ -1506,6 +1529,7 @@ ursgal_params = {
             'msgfplus_style_1' : '-s',
             'xtandem_style_1' : 'spectrum, path',
             'novor_style_1' : '-f',
+            'pepnovo_style_1' : '-file',
         },
         'utag' : [
             'input',
@@ -1518,18 +1542,26 @@ ursgal_params = {
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
+            'pepnovo_3_1',
         ],
-        'default_value' : 1e-07,
-        'description' :  ''' Lowest score for reported peptides ''',
+        'default_value' : 'default',
+        'description' :  ''' Lowest score for reported peptides. If set to 'default', default values fo each engine will be used. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'MinResultScore',
+            'pepnovo_style_1' : '-min_filter_prob',
         },
         'utag' : [
             'output',
             'scoring',
         ],
         'uvalue_translation' : {
+            'myrimatch_style_1' : {
+                'default' : 1e-07,
+            },
+            'pepnovo_style_1' : {
+                'default' : 0.9,
+            },
         },
         'uvalue_type' : "float",
     },
@@ -1619,6 +1651,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
         'default_value' : [
             '*,opt,Prot-N-term,Acetyl',
@@ -1659,6 +1692,7 @@ Example:
             'omssa_style_1' : '-mv',
             'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
             'novor_style_1' : ('variableModifications', 'fixedModifications'),
+            'pepnovo_style_1' : '-PTMs'
         },
         'utag' : [
             'Modifications',
@@ -2062,6 +2096,7 @@ Example:
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
             'omssa_2_1_9',
+            'pepnovo_3_1',
         ],
         'default_value' : 10,
         'description' :  ''' Maximum number of peptide spectrum matches to report for each spectrum ''',
@@ -2071,6 +2106,7 @@ Example:
             'msgfplus_style_1' : '-n',
             'myrimatch_style_1' : 'MaxResultRank',
             'omssa_style_1' : '-hc',
+            'pepnovo_style_1' : '-num_solutions',
         },
         'utag' : [
             'output',
@@ -2155,6 +2191,7 @@ Example:
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
@@ -2171,6 +2208,7 @@ Example:
             'xtandem_style_1' : 'output, path',
             'myrimatch_style_1' : 'output_file_incl_path',
             'novor_style_1' : 'output_file_incl_path',
+            'pepnovo_style_1' : 'output_file_incl_path',
         },
         'utag' : [
             'output',
@@ -2232,6 +2270,199 @@ Example:
         },
         'uvalue_type' : "",
     },
+    'base_mz' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+            'omssa_2_1_9',
+        ],
+        'default_value' : 1000,
+        'description' :  ''' m/z value that is used as basis for the conversion from ppm to Da''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : 'base_mz',
+            'pepnovo_style_1': 'base_mz',
+        },
+        'utag' : [
+            'Precursor', 'Fragment',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'pepnovo_model_dir' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : None,
+        'description' :  ''' Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1 ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-model_dir',
+        },
+        'utag' : [
+            'Model',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'pepnovo_tag_length' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : None,
+        'description' :  '''Returns peptide sequences of the specified length (only lengths 3-6 are allowed) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-tag_length',
+        },
+        'utag' : [
+            'peptide',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'pepnovo_model' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : 'CID_IT_TRYP',
+        'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-model',
+        },
+        'utag' : [
+            'Model',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : ['CID_IT_TRYP'],
+    },
+    'use_spectrum_charge' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Does not correct precusor charge. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-use_spectrum_charge',
+        },
+        'utag' : [
+            'Precursor',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+    },
+    'output_cum_probs' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Output cumulative probabilities. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-output_cum_probs',
+        },
+        'utag' : [
+            'Output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+    },
+    'output_prm' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Only print spectrum graph nodes with scores. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-prm',
+        },
+        'utag' : [
+            'Output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+    },
+    'output_prm_norm' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : False,
+        'description' :  ''' Prints spectrum graph scores after normalization and removal of negative scores. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-prm_norm',
+        },
+        'utag' : [
+            'Output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+    },
+    'output_aa_probs' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Output probabilities for each amino acid. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-output_aa_probs',
+        },
+        'utag' : [
+            'Output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+    },
+    'use_quality_filter' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Does remove low quality filter. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-no_quality_filter',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+            'pepnovo_style_1' : {
+                True : False,
+                False : True,
+            },
+        },
+        'uvalue_type' : 'bool',
+    },
+    'use_spectrum_mz' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Does not correct precusor m/z. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1': '-use_spectrum_mz',
+        },
+        'utag' : [
+            'Precursor',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+    },
     'precursor_isotope_range' : {
         'available_in_unode' : [
             'msgfplus_v9979',
@@ -2242,6 +2473,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'pepnovo_3_1',
         ],
         'default_value' : "0,1",
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
@@ -2250,9 +2482,10 @@ Example:
             'msgfplus_style_1' : '-ti',
             'myrimatch_style_1' : 'MonoisotopeAdjustmentSet',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
+            'pepnovo_style_1' : '-correct_pm',
         },
         'utag' : [
-            'precursor',
+            'Precursor',
         ],
         'uvalue_translation' : {
             'myrimatch_style_1' : {
@@ -2286,6 +2519,7 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
@@ -2297,6 +2531,7 @@ Example:
             'omssa_style_1' : '-te',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
             'novor_style_1' : 'precursorErrorTol',
+            'pepnovo_style_1': '-pm_tolerance',
         },
         'utag' : [
             'precursor',
@@ -2319,6 +2554,7 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
@@ -2329,7 +2565,8 @@ Example:
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
             'omssa_style_1' : '-te',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
-            'novor_style_1' : 'precursorErrorTol'
+            'novor_style_1' : 'precursorErrorTol',
+            'pepnovo_style_1': '-pm_tolerance',
         },
         'utag' : [
             'precursor',
@@ -2352,6 +2589,7 @@ Example:
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
             'novor_1_1beta',
+            'pepnovo_3_1',
         ],
         'default_value' : "ppm",
         'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
@@ -2362,7 +2600,8 @@ Example:
             'omssa_style_1' : '-teppm',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error units',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
-            'novor_style_1' : 'precursorErrorTol'
+            'novor_style_1' : 'precursorErrorTol',
+            'pepnovo_style_1' : 'precursor_mass_tolerance_unit',
         },
         'utag' : [
             'precursor',
@@ -3406,6 +3645,7 @@ Example:
                 'myrimatch_2_1_140' : 'MyriMatch:MVH',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
                 'novor_1_1beta' : 'Novor:score',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
@@ -3420,6 +3660,7 @@ Example:
                 'myrimatch_2_1_140' : 'MyriMatch:MVH',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
                 'novor_1_1beta' : 'Novor:score',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
@@ -3434,6 +3675,7 @@ Example:
                 'myrimatch_2_1_140' : 'MyriMatch:MVH',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
                 'novor_1_1beta' : 'Novor:score',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
@@ -3448,6 +3690,7 @@ Example:
                 'myrimatch_2_1_140' : 'MyriMatch:MVH',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
                 'novor_1_1beta' : 'Novor:score',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
             },
         },
         'uvalue_type' : "",
