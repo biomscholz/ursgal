@@ -375,6 +375,9 @@ ursgal_params = {
             'database',
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                'all' : 0,
+            },
         },
         'uvalue_type' : "str",
     },
@@ -803,6 +806,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'novor_1_1beta',
             'pepnovo_3_1',
+            'omssa_2_1_9',
         ],
         'default_value' : "ppm",
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
@@ -813,6 +817,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'FragmentMzTolerance',
             'novor_style_1' : 'fragmentIonErrorTol',
             'pepnovo_style_1' : 'frag_mass_tolerance_unit',
+            'omssa_style_1' : '-to',
         },
         'utag' : [
             'fragment',
@@ -1345,18 +1350,21 @@ ursgal_params = {
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
-        'default_value' : 0,
-        'description' :  ''' max number of ions in each series being searched (0=all) ''',
+        'default_value' : 'all',
+        'description' :  ''' Max number of ions in each series being searched (0=all) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-sp',
         },
         'utag' : [
-            'search',
+            'scoring',
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                'all' : 0,
+            },
         },
-        'uvalue_type' : "bool",
+        'uvalue_type' : "int",
     },
     'max_num_per_mod' : {
         'available_in_unode' : [
@@ -1414,7 +1422,7 @@ ursgal_params = {
             'omssa_style_1' : '-nox',
         },
         'utag' : [
-            'peptide',
+            'Peptide',
         ],
         'uvalue_translation' : {
         },
@@ -1520,6 +1528,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'novor_1_1beta',
             'pepnovo_3_1',
+            'omssa_2_1_9',
         ],
         'default_value' : None,
         'description' :  ''' Path to input .mgf file ''',
@@ -1530,6 +1539,7 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, path',
             'novor_style_1' : '-f',
             'pepnovo_style_1' : '-file',
+            'omssa_style_1' : '-fm',
         },
         'utag' : [
             'input',
@@ -1581,7 +1591,7 @@ ursgal_params = {
             'omssa_style_1' : '-no',
         },
         'utag' : [
-            'peptide',
+            'Peptide',
         ],
         'uvalue_translation' : {
         },
@@ -1607,7 +1617,7 @@ ursgal_params = {
             'xtandem_style_1' : 'scoring, minimum ion count',
         },
         'utag' : [
-            'fragment',
+            'Fragment', 'Spectrum'
         ],
         'uvalue_translation' : {
         },
@@ -1630,8 +1640,8 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, minimum peaks',
         },
         'utag' : [
-            'MS2',
-            'fragment',
+            'Spectrum',
+            'Fragment',
         ],
         'uvalue_translation' : {
         },
@@ -1689,7 +1699,7 @@ Example:
             'msamanda_style_1' : 'modifications',
             'msgfplus_style_1' : '-mod',
             'myrimatch_style_1' : ('DynamicMods', 'StaticMods'),
-            'omssa_style_1' : '-mv',
+            'omssa_style_1' : ('-mv','mf'),
             'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
             'novor_style_1' : ('variableModifications', 'fixedModifications'),
             'pepnovo_style_1' : '-PTMs'
@@ -2192,6 +2202,7 @@ Example:
             'myrimatch_2_1_140',
             'novor_1_1beta',
             'pepnovo_3_1',
+            'omssa_style_1',
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
@@ -2209,6 +2220,7 @@ Example:
             'myrimatch_style_1' : 'output_file_incl_path',
             'novor_style_1' : 'output_file_incl_path',
             'pepnovo_style_1' : 'output_file_incl_path',
+            'omssa_style_1' : 'output_file_incl_path',
         },
         'utag' : [
             'output',
@@ -2219,56 +2231,40 @@ Example:
     },
     'output_file_type' : {
         'available_in_unode' : [
-        ],
-        'default_value' : "None",
-        'description' :  ''' Output file type ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    'output_mzid' : {
-        'available_in_unode' : [
+            'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : False,
-        'description' :  ''' Repot results in mzid format ''',
+        'default_value' : "default",
+        'description' :  ''' Output file type. If set to 'default', default output file tzpes for each engine are used. Note: not every file type is supported by every engine and usin non-default types might cause problems during conversion to .csv. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'xtandem_style_1' : 'refine',
+            'omssa_style_1' : ('-oc', '-ox')
+            'xtandem_style_1' : 'output, mzid',
         },
         'utag' : [
-            'Output',
+            'Output'
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                'default' : '-oc',
+                '.omx' : '-ox',
+                '.csv'  : '-oc',
+            },
             'xtandem_style_1' : {
-                False : 'no',
-                True : 'yes',
+                'default' : False,
+                '.mzid' : True,
             },
         },
-        'uvalue_type' : "bool",
-    },
-    'output_suffix' : {
-        'available_in_unode' : [
+        'uvalue_type' : [
+            'default',
+            '.omx',
+            '.csv',
+            '.mzid',
         ],
-        'default_value' : "",
-        'description' :  ''' Output suffix: string ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
     },
     'base_mz' : {
         'available_in_unode' : [
@@ -2622,6 +2618,10 @@ Example:
             'novor_style_1' : {
                 'da' : 'Da',
             },
+            'omssa_style_1' : {
+                'ppm' : '-teppm',
+                'da' : '',
+            },
         },
         'uvalue_type' : [
             'da',
@@ -2687,7 +2687,7 @@ Example:
             'omssa_style_1' : '-zh',
         },
         'utag' : [
-            'precursor',
+            'Precursor',
         ],
         'uvalue_translation' : {
         },
@@ -2728,7 +2728,7 @@ Example:
             'omssa_style_1' : '-zl',
         },
         'utag' : [
-            'precursor',
+            'Precursor',
         ],
         'uvalue_translation' : {
         },
@@ -3277,12 +3277,12 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-    'search_c_terminal_ions' : {
+    'score_c_terminal_ions' : {
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
         'default_value' : True,
-        'description' :  ''' search c terminal ions? ''',
+        'description' :  ''' Score c terminal ions ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-sct',
@@ -3315,12 +3315,12 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-    'search_for_b1_ions' : {
+    'score_b1_ions' : {
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
         'default_value' : False,
-        'description' :  ''' should first forward (b1) product ions be in search (1=no) ''',
+        'description' :  ''' first forward (b1) product ions inclued in search ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-sb1',
@@ -3382,7 +3382,7 @@ Example:
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-ntt',
             'myrimatch_style_1' : 'MinTerminiCleavages',
-            'omssa_style_1' : 'semi_enzyme',
+            'omssa_style_1' : '-e',
             'xtandem_style_1' : 'protein, cleavage semi',
         },
         'utag' : [
