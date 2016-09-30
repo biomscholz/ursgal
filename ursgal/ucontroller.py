@@ -467,6 +467,8 @@ class UController(ursgal.UNode):
             )
             if 'xtandem' in last_engine:
                 engine_name = 'xtandem2csv_1_0_0'
+            elif 'msgfplus_v2016_09_16' in last_engine:
+                engine_name = 'msgfplus2csv_v2016_09_16'
             else:
                 engine_name = self.params['mzidentml_converter_version']
 
@@ -1486,7 +1488,6 @@ class UController(ursgal.UNode):
         # add uNodes name as defined in kb
         # if there is no entry called 'output_suffix', the engine/node
         # name is used instead; if it's None, no suffix is added
-
         output_suffix = self.meta_unodes[ engine ].META_INFO.get(
             'output_suffix', engine
         )
@@ -2299,7 +2300,7 @@ Please include the following in the knowledge base in META_INFO of {0}:
                     # check online if md5 dile is present!
                     http_get_params = {
                         'http_url': os.path.join(
-                            'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
+                            self.params['ursgal_resource_url'],
                             resource_source_folder,
                             '{0}.md'.format(engine)
                         ).replace('\\','/'),
@@ -2417,18 +2418,15 @@ Nothing to do here...
                 # exit()
         return zip_file_list, update_kb_list
 
-    def download_resources(self, http_url_root=None):
+    def download_resources(self):
         '''
         Function to download all executable from the specified http url
 
         '''
-        if http_url_root is None:
-            print('No download url was specified')
-            exit()
         download_zip_files = []
         get_http_main = self.unodes['get_http_files_1_0_0']['class'].import_engine_as_python_function()
         base_http_get_params = {
-            'http_url_root': http_url_root
+            'http_url_root': self.params['ursgal_resource_url'],
         }
 
         for engine in self.unodes.keys():
@@ -2552,11 +2550,11 @@ Please install the engine manually!
                             '{0}.zip'.format(engine)
                         )
                         tmp_http_get_params['http_url'] =  os.path.join(
-                            'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
+                            self.params['ursgal_resource_url'],
                             zip_file_name
                         ).replace('\\','/')
                         print(
-                            'MD5 check successfull! The executables will be downloaded from {0}'.format(
+                            'MD5 check successful! The executables will be downloaded from {0}'.format(
                                 tmp_http_get_params['http_url']
                                 )
                         )
@@ -2788,7 +2786,7 @@ True
         )
 
 
-    def visualize(self, input_files, engine, force=None, output_file_name=None):
+    def visualize(self, input_files, engine, force=None, output_file_name=None, multi=True):
         '''
         The ucontroller function for visualization
 
@@ -2828,7 +2826,7 @@ True
             str: Path of the output file
         '''
         engine_name = self.engine_sanity_check( engine )
-        self.input_file_sanity_check( input_files, engine=engine_name, multi=True )
+        self.input_file_sanity_check( input_files, engine=engine_name, multi=multi )
         answer = self.prepare_unode_run(
             input_files,
             output_file = output_file_name,
